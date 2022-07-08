@@ -25,6 +25,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  bool _run = false;
 
   void _defCounter() {
     setState(() {
@@ -35,6 +36,16 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
     setState(() {
       _counter++;
+    });
+  }
+
+  void _incContAuto(){
+    setState(() {
+      if (_run) {
+         _counter++;
+      } else {
+        return;
+      }
     });
   }
 
@@ -62,12 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  
                     onPressed: _defCounter, 
                     child: Icon(Icons.replay_outlined)),
                 ElevatedButton(
                     onPressed: _incrementCounter,
-                    child: Icon(Icons.add_outlined))
+                    child: Icon(Icons.add_outlined)),
+                Switch(value: _run, onChanged: true))
               ],
             )
           ],
