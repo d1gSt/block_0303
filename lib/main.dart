@@ -1,6 +1,10 @@
 // ignore_for_file: prefer_const_constructors
-
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+Color blue = Color(0xff003366);
+  Color white = Color(0xfff2f3f4);
+  Color red = Color(0xfff08080);
+
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +15,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const MyHomePage(title: 'Flutter Demo Home Page'));
+        theme: ThemeData(
+            textTheme: GoogleFonts.openSansTextTheme(
+              Theme.of(context).textTheme,
+            ),
+            colorScheme:ColorScheme(
+              brightness:Brightness.light,
+              primary:blue,
+              onPrimary:white,
+              secondary:blue,
+              onSecondary: white,
+              error:red,
+              onError:Colors.black,
+              background:blue,
+              onBackground:white,
+              surface:white,
+              onSurface:Colors.black,
+            )),
+        home: const MyHomePage(title: 'Flutter Demo Home Page'));
   }
 }
 
@@ -25,7 +46,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  bool _run = false;
 
   void _defCounter() {
     setState(() {
@@ -39,23 +59,11 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _incContAuto(){
-    setState(() {
-      if (_run) {
-         _counter++;
-      } else {
-        return;
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueAccent,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.blueAccent,
         title: Text(widget.title),
       ),
       body: Center(
@@ -68,17 +76,16 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
-            ),  Divider(),
+            ),
+            Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                    onPressed: _defCounter, 
-                    child: Icon(Icons.replay_outlined)),
+                    onPressed: _defCounter, child: Icon(Icons.replay_outlined)),
                 ElevatedButton(
                     onPressed: _incrementCounter,
                     child: Icon(Icons.add_outlined)),
-                Switch(value: _run, onChanged: true))
               ],
             )
           ],
