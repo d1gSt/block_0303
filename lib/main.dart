@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-Color blue = Color(0xff003366);
-  Color white = Color(0xfff2f3f4);
-  Color red = Color(0xfff08080);
 
+Color blue = Color(0xff003366);
+Color white = Color(0xfff2f3f4);
+Color red = Color(0xfff08080);
 
 void main() {
   runApp(const MyApp());
@@ -19,20 +19,20 @@ class MyApp extends StatelessWidget {
             textTheme: GoogleFonts.openSansTextTheme(
               Theme.of(context).textTheme,
             ),
-            colorScheme:ColorScheme(
-              brightness:Brightness.light,
-              primary:blue,
-              onPrimary:white,
-              secondary:blue,
+            colorScheme: ColorScheme(
+              brightness: Brightness.light,
+              primary: blue,
+              onPrimary: white,
+              secondary: blue,
               onSecondary: white,
-              error:red,
-              onError:Colors.black,
-              background:blue,
-              onBackground:white,
-              surface:white,
-              onSurface:Colors.black,
+              error: red,
+              onError: Colors.black,
+              background: blue,
+              onBackground: white,
+              surface: white,
+              onSurface: Colors.black,
             )),
-        home: const MyHomePage(title: 'Flutter Demo Home Page'));
+        home: const MyHomePage(title: 'Block 0303'));
   }
 }
 
@@ -45,52 +45,48 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final _ctrl = TextEditingController();
 
-  void _defCounter() {
-    setState(() {
-      _counter = 0;
-    });
-  }
+  late String answ;
+  RegExp reg = RegExp(r'^0303');
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                    onPressed: _defCounter, child: Icon(Icons.replay_outlined)),
-                ElevatedButton(
-                    onPressed: _incrementCounter,
-                    child: Icon(Icons.add_outlined)),
-              ],
-            )
-          ],
+        appBar: AppBar(
+          elevation: 0,
+          title: Text(widget.title),
+          centerTitle: true,
         ),
-      ),
-    );
+        body: Center(
+            child: Container(
+          padding: EdgeInsets.all(15),
+          child: Center(
+            child: Column(children: [
+              TextField(
+                controller: _ctrl,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Nº'),
+              ),
+              OutlinedButton(
+                  onPressed: () {
+                    if (reg.hasMatch(_ctrl.text)) {
+                      answ = 'nanana';
+                      print('$answ - ${_ctrl.text}');
+                    } else {
+                      answ = 'blz';
+                      print('$answ - ${_ctrl.text}');
+                    }
+                  },
+                  child: Text('OK')),
+            ]),
+          ),
+        )));
   }
 }
